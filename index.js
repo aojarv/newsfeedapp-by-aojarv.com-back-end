@@ -21,7 +21,7 @@ cron.schedule('*/2 * * * *', function(){
   timeswirefixed = []
   const getTimesWire = fetch(`https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=${process.env.API_KEY}`).then(res => res.json()).then(json => {
   for(let i = 0; i < json.results.length; i++){
-    let picture = ""
+    let picture = ``
     let cpr = ``
     if(!!json.results[i].multimedia && json.results[i].multimedia.length > 0){
       picture = json.results[i].multimedia[1].url
@@ -147,6 +147,18 @@ cron.schedule('0 * * * *', function(){
 })
 
 cron.schedule('0 * * * *', function(){
+  mostpopularfixed = []
+  getAllMostpopularData()
+  mostpopular = mostpopularfixed
+})
+
+cron.schedule('30 * * * *', function(){
+  topstoriesfixed = []
+  getAllTopstoriesData()
+  topstories = topstoriesfixed
+})
+
+cron.schedule('30 * * * *', function(){
   mostpopularfixed = []
   getAllMostpopularData()
   mostpopular = mostpopularfixed
